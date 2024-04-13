@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landlord Dashboard</title>
+    <link rel="stylesheet" href="css/landlord_prop.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        /* CSS for modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        h2{
+            margin: 10px;
+        }
+        
+        button{
+            margin: 10px;
+            border-radius: 5px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('uploads/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .navbar-brand img {
+        max-width: 200px; /* Adjust the width as needed */
+        max-height: 50px; /* Adjust the height as needed */
+        }
+        footer {
+            background-color: #333; /* Background color */
+            color: white; /* Text color */
+            padding: 5px; /* Adjust padding as needed */
+            text-align: center; /* Align text to center */
+            margin-top: 365px;
+        }
+    </style>
+</head>
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.php"> <img src="uploads/logo.jpg" alt="Logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="login.html">Login</a>
+        <a class="nav-item nav-link" href="landlord_prop.html">Landlord</a>
+        <a class="nav-item nav-link" href="warden.php">Warden</a>
+        <a class="nav-item nav-link" href="admin.html">Admin</a>
+        <a class="nav-item nav-link" href="logout.php">Logout</a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+<body>
+
+    <!-- Property Management Section -->
+    <h2>Property Management</h2>
+    <div id="propertyList">
+        <!-- Property listings will be displayed here -->
+    </div>
+    
+    <!-- Button to open the modal -->
+<button id="openModalBtn">Add Listing</button>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <center>
+        <h1>Add Listing</h1>
+    </center>
+    
+    <form action="add_listing.php" method="POST" enctype="multipart/form-data">
+        <div class="input-group">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" required><br>
+        </div>
+        <div class="input-group">
+            <label for="rent">Rent:</label><br>
+            <input type="number" id="rent" name="rent" step="0.01" required><br>
+        </div>
+        <div class="input-group">
+            <label for="rooms">Number of Rooms:</label><br>
+            <input type="number" id="rooms" name="rooms" required><br>
+        </div>
+        <div class="input-group">
+            <label for="beds">Number of Beds</label><br>
+            <input type="number" id="beds" name="beds" required><br>
+        </div>
+        <div class="input-group">
+            <label for="longitude">Longitude</label><br>
+            <input type="number" id="longitude" name="longitude" step="0.000001" required><br>
+        </div>
+        <div class="input-group">
+            <label for="latitude">Latitude</label><br>
+            <input type="number" id="latitude" name="latitude" step="0.000001" required><br>
+        </div>
+        <label for="image">Image:</label><br>
+        <input type="file" id="image" name="image" required accept="image/*"><br>
+        <br>
+        <button type="submit" name="add_listing">Add Listing</button>
+        
+    </form>
+  </div>
+
+</div>
+
+<button onclick="showListings()">Show My Listings</button>
+<button onclick="showReservations()">Show My Reservations</button>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openModalBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+    <script>
+
+        // Submit add property form
+        document.getElementById('propertyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Add your property addition logic here
+            alert('Property added');
+            // Clear the form and hide it
+            document.getElementById('propertyForm').reset();
+            document.getElementById('addPropertyForm').style.display = 'none';
+        });
+
+  
+        function toggleDetails(listingId) {
+            var details = document.getElementById(listingId);
+            if (details.style.display === "none") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+        function addListing() {
+            var container = document.getElementById("listingsContainer");
+            var listingId = "listing" + container.children.length;
+            var newListing = document.createElement("div");
+            newListing.className = "listing";
+            newListing.innerHTML = `
+                <img src="img/property${container.children.length + 1}.jpg" alt="Property ${container.children.length + 1}">
+                <h4>Property Title ${container.children.length + 1}</h4>
+                <p>Location: NSBM Green University</p>
+                <p>Rent: $500/month</p>
+                <button onclick="toggleDetails('${listingId}')">View Details</button>
+                <div id="${listingId}" class="details">
+                    <p>Number of Rooms: 2</p>
+                    <p>Number of Beds: 3</p>
+                </div>
+            `;
+            container.appendChild(newListing);
+        }
+
+        function showListings() {
+            // Redirect to the page that displays listings
+            window.location.href = "show_listings.php";
+        }
+
+        function showReservations() {
+            window.location.href = "reserve_property.php";
+        }
+
+
+    </script>
+
+</body>
+<footer>
+    <p>&copy; Plymouth batch 11 Group AG, NSBM Green University</p>
+</footer>
+</html>
