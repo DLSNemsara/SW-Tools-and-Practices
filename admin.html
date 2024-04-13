@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* Styling for the password protection overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.651); /* Semi-transparent black */
+            z-index: 999; /* Ensure it's above everything else */
+        }
+        
+        .overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('uploads/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .navbar-brand img {
+        max-width: 200px; /* Adjust the width as needed */
+        max-height: 50px; /* Adjust the height as needed */
+        }
+        footer {
+            background-color: #333; /* Background color */
+            color: white; /* Text color */
+            padding: 5px; /* Adjust padding as needed */
+            text-align: center; /* Align text to center */
+        }
+    </style>
+</head>
+<body>
+<div class="overlay" id="passwordOverlay">
+    <div class="overlay-content">
+        <h2>Enter Password to Proceed</h2>
+        <input type="password" id="passwordInput">
+        <button onclick="checkPassword()">Submit</button>
+        <button onclick="cancel()">Cancel</button>
+    </div>
+</div>
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.php"> <img src="uploads/logo.jpg" alt="Logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="login.html">Login</a>
+        <a class="nav-item nav-link" href="landlord_prop.html">Landlord</a>
+        <a class="nav-item nav-link" href="warden.php">Warden</a>
+        <a class="nav-item nav-link" href="admin.html">Admin</a>
+        <a class="nav-item nav-link" href="logout.php">Logout</a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+
+<main>
+    <form action="admin.php" method="post">
+        <h2>Register Form</h2>
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="student">Student</option>
+            <option value="landlord">Landlord</option>
+            <option value="warden">Warden</option>
+        </select><br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit" name="register">Register</button>
+    </form>
+</main>
+
+<script>
+    // Function to check the entered password
+    function checkPassword() {
+        var password = document.getElementById("passwordInput").value;
+        // Replace 'your_password_here' with your actual password
+        if (password === "admin123") {
+            document.getElementById("passwordOverlay").style.display = "none";
+            document.body.style.overflow = "auto"; // Enable scrolling
+        } else {
+            alert("Incorrect password. Please try again.");
+        }
+    }
+
+    // Function to cancel the password prompt
+    function cancel() {
+        window.location.href = "index.php"; // Redirect to index.php
+    }
+    
+    // Function to display the password protection overlay
+    window.onload = function() {
+        document.getElementById("passwordOverlay").style.display = "block";
+        document.body.style.overflow = "hidden"; // Disable scrolling
+    };
+</script>
+
+<footer>
+    <p>&copy; Plymouth batch 11 Group AG, NSBM Green University</p>
+</footer>
+
+</body>
+</html>
