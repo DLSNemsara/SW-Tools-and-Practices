@@ -1,0 +1,87 @@
+/* styles.css */
+
+header, nav, main, footer {
+    padding: 10px;
+}
+
+/*** Navbar ***/
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  nav ul li a:hover {
+    color: #555;
+  }
+
+footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+form {
+    width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 10px; /* Add border radius */
+    padding: 20px; /* Add padding */
+}
+
+form h2 {
+    margin-top: 0;
+    margin-bottom: 20px; /* Added margin bottom for spacing */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
