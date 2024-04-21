@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Dashboard</title>
+    <link rel="stylesheet" href="css/warden.css">
+    <style>
+        /* CSS for semi-transparent overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 1000;
+            display: none; /* Initially hidden */
+        }
+
+        /* CSS for modal */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 1001; /* Ensure modal appears above overlay */
+            display: none; /* Initially hidden */
+        }
+
+        /* CSS for sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            padding-top: 50px;
+        }
+        
+        /* CSS for navbar items */
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar ul li {
+            padding: 10px;
+        }
+        
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* CSS for content */
+        .content {
+            margin-left: 200px; /* Adjust this value according to sidebar width */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Semi-transparent overlay -->
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a  href="index.php">Home</a></li>
+            <li><a  href="login.html">Login</a></li>
+            <li><a  href="landlord_prop.html">Landlord</a></li>
+            <li><a  href="warden.html">Warden</a></li>
+        </ul>
+    </div>
+
+    <!-- Footer Start -->
+    <div
+      class="container-fluid footer bg-dark text-light footer mt-5 pt-5 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5">
+        <div class="row g-5">
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Address</h5>
+            <p class="mb-2">
+              <i class="fa fa-map-marker-alt me-3"></i>NSBM Green University, Homagama, Sri Lanka
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-phone-alt me-3"></i>+94 11 544 5000
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-envelope me-3"></i> inquiries@nsbm.ac.lk 
+            </p>
+            <div class="d-flex pt-2">
+              <a class="btn btn-outline-light btn-social" 
+              href="https://www.youtube.com/channel/UCHsodhRyiuri2jD7H7nfsRg/feed"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" 
+              href="https://www.bing.com/ck/a?!&&p=685822d1dfcd8b48JmltdHM9MTcxMDI4ODAwMCZpZ3VpZD0yNzM4NjdlZC03MGE0LTZmMjItMGVlYy03NjYwNzFhNTZlZDQmaW5zaWQ9NTE5Nw&ptn=3&ver=2&hsh=3&fclid=273867ed-70a4-6f22-0eec-766071a56ed4&psq=nsbm+facebook&u=a1aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL25zYm0ubGsv&ntb=1"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" 
+              href="https://www.youtube.com/channel/UCHsodhRyiuri2jD7H7nfsRg/feed"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" 
+              href="https://www.linkedin.com/company/nsbm-green-university-town/"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Quick Links</h5>
+            <a class="btn btn-link" href="">About Us</a>
+            <a class="btn btn-link" href="">Contact Us</a>
+            <a class="btn btn-link" href="">Our Services</a>
+            <a class="btn btn-link" href="">Terms & Condition</a>
+            <a class="btn btn-link" href="">Support</a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Popular Links</h5>
+            <a class="btn btn-link" href="">About Us</a>
+            <a class="btn btn-link" href="">Contact Us</a>
+            <a class="btn btn-link" href="">Our Services</a>
+            <a class="btn btn-link" href="">Terms & Condition</a>
+            <a class="btn btn-link" href="">Support</a>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <h5 class="text-light mb-4">Newsletter</h5>
+            <p>........</p>
+            <div class="position-relative mx-auto" style="max-width: 400px">
+              <input
+                class="form-control border-0 w-100 py-3 ps-4 pe-5"
+                type="text"
+                placeholder="Your email"
+              />
+              <button
+                type="button"
+                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
+              >
+                SignUp
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              &copy; <a class="border-bottom" href="#">Visit Horton Plains</a>, All
+              Right Reserved.
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              
+              Designed By
+              <a class="border-bottom" href="#">Group B7</a
+              >, University of Plymouth
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+</body>    
+</html>    
+    
+    
